@@ -197,7 +197,6 @@ function renderizarCard(veiculo, fotoUrl) {
   card.innerHTML = `
   <div class="card-image">
     <img src="${fotoUrl}" alt="${veiculo.marca} ${veiculo.modelo}">
-    <span class="foto-tag">Foto 360°</span>
   </div>
   <div class="card-content">
     <h3>${capitalize(veiculo.marca)}</h3>
