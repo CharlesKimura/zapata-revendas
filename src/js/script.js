@@ -169,7 +169,7 @@ function abrirModalDetalhes(veiculo, fotoUrl) {
     };
   }
 
-  const telefoneVendedor = '5511934469042';
+  const telefoneVendedor = '5511956105614';
 
   const mensagem = `Olá, tenho interesse no ${titulo} do ano ${veiculo.ano} anunciado por ${formatarPreco(veiculo.preco)}.`;
 
@@ -211,7 +211,7 @@ function renderizarCard(veiculo, fotoUrl) {
     console.log('✅ Card clicado');
     abrirModalDetalhes(veiculo, fotoUrl);
   });
-  const telefoneVendedor = '5511999998888';
+  const telefoneVendedor = '5511956105614';
 
   const mensagem = `Olá, tenho interesse no ${veiculo.marca} ${veiculo.modelo} do ano ${veiculo.ano} anunciado por ${veiculo.preco}.`;
 
@@ -283,10 +283,7 @@ function renderizarPaginacao() {
   const btnAnterior = document.getElementById('paginaAnterior');
   const btnProxima = document.getElementById('proximaPagina');
 
-  // Atualiza número visível
   paginaAtualEl.textContent = paginaAtual;
-
-  // Ativa ou desativa botões conforme necessário
   btnAnterior.disabled = paginaAtual <= 1;
   btnProxima.disabled = paginaAtual >= totalPaginas;
 
@@ -346,8 +343,8 @@ const filtroTipoSelect = document.getElementById('filtroTipo');
 if (filtroTipoSelect) {
   filtroTipoSelect.addEventListener('change', (e) => {
     const tipoSelecionado = e.target.value;
-    document.getElementById('inputCodigo').value = ''; // limpa busca por código
-    carregarVeiculos(tipoSelecionado); // recarrega com o tipo selecionado
+    document.getElementById('inputCodigo').value = '';
+    carregarVeiculos(tipoSelecionado);
   });
 }
 
@@ -433,7 +430,7 @@ Preço: R$ ${Number(dados.preco).toLocaleString("pt-BR")}
 Descrição: ${dados.descricao}
 Documentação completa? ${dados.documentacao}`;
 
-      const numeroWhatsApp = "5511934469042";
+      const numeroWhatsApp = "5511956105614";
       const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
       console.log("📦 URL gerada:", url);
       window.open(url, "_blank");
@@ -454,7 +451,7 @@ document.getElementById('btnBuscarCodigo').addEventListener('click', async () =>
   const codigo = document.getElementById('inputCodigo').value.trim();
 
   if (codigo === '') {
-    carregarVeiculos(); // volta para lista normal
+    carregarVeiculos();
     return;
   }
 
@@ -469,7 +466,7 @@ document.getElementById('btnBuscarCodigo').addEventListener('click', async () =>
   if (error || !veiculos || veiculos.length === 0) {
     container.innerHTML = `<p>Nenhum veículo encontrado com o código <strong>${codigo}</strong>.</p>`;
     veiculosFiltrados = [];
-    renderizarPaginacao(); // zera paginação
+    renderizarPaginacao();
     return;
   }
 
