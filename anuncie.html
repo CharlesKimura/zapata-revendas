@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anuncie seu veículo | Zapata Revendas</title>
+  <link rel="stylesheet" href="src/css/reset.css" />
+  <link rel="stylesheet" href="src/css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<a href="https://www.instagram.com/zapata_revendas?igsh=eDgxNDI5aDI3Mmx6 " class="instagram-float" target="_blank" aria-label="Instagram">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="instagram-icon">
+    <path fill="white" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9 114.9-51.3 114.9-114.9S287.7 141 224.1 141zm0 190.6c-41.8 0-75.7-33.9-75.7-75.7s33.9-75.7 75.7-75.7 75.7 33.9 75.7 75.7-33.9 75.7-75.7 75.7zm146.4-194.3c0 14.9-12 26.9-26.9 26.9-14.9 0-26.9-12-26.9-26.9s12-26.9 26.9-26.9 26.9 12 26.9 26.9zm76.1 27.2c-1.7-35.3-9.9-66.7-36.2-93-26.4-26.4-57.7-34.5-93-36.2-36.7-2.1-147.3-2.1-184 0-35.3 1.7-66.7 9.9-93 36.2s-34.5 57.7-36.2 93c-2.1 36.7-2.1 147.3 0 184 1.7 35.3 9.9 66.7 36.2 93s57.7 34.5 93 36.2c36.7 2.1 147.3 2.1 184 0 35.3-1.7 66.7-9.9 93-36.2 26.4-26.4 34.5-57.7 36.2-93 2.1-36.7 2.1-147.3 0-184zM398.8 388c-7.8 19.5-22.9 34.6-42.4 42.4-29.4 11.7-99.2 9-132.3 9s-102.9 2.6-132.3-9c-19.5-7.8-34.6-22.9-42.4-42.4-11.7-29.4-9-99.2-9-132.3s-2.6-102.9 9-132.3c7.8-19.5 22.9-34.6 42.4-42.4 29.4-11.7 99.2-9 132.3-9s102.9-2.6 132.3 9c19.5 7.8 34.6 22.9 42.4 42.4 11.7 29.4 9 99.2 9 132.3s2.7 102.9-9 132.3z"/>
+  </svg>
+</a>
+
+<body>
+  <header>
+    <h1>Zapata Revendas</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="anuncie.html" aria-current="page">Anuncie</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="anuncie">
+      <h2>Anuncie seu veículo conosco</h2>
+      <form id="whatsappForm">
+        <div class="form-row">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" required placeholder="Seu nome completo" />
+        </div>
+
+        <div class="form-row">
+          <label for="telefone">Telefone:</label>
+          <input type="tel" id="telefone" name="telefone" required placeholder="11912345678" />
+        </div>
+
+        <div class="form-row">
+          <label for="tipo">Tipo:</label>
+          <select id="tipo" name="tipo" required>
+            <option value="">Selecione</option>
+            <option value="Carro">Carro</option>
+            <option value="Moto">Moto</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="marca">Marca:</label>
+          <input type="text" id="marca" name="marca" required placeholder="Marca do veículo" />
+        </div>
+
+        <div class="form-row">
+          <label for="modelo">Modelo:</label>
+          <input type="text" id="modelo" name="modelo" required placeholder="Modelo do veículo" />
+        </div>
+
+        <div class="form-row">
+          <label for="ano">Ano:</label>
+          <input type="number" id="ano" name="ano" min="1900" max="2099" required placeholder="Ano do veículo" />
+        </div>
+
+        <div class="form-row">
+          <label for="km">Km:</label>
+          <input type="number" id="km" name="km" required placeholder="Quilometragem do veículo" />
+        </div>
+
+        <div class="form-row">
+          <label for="preco">Preço (R$):</label>
+          <input type="number" id="preco" name="preco" required placeholder="Preço de venda do veículo" />
+        </div>
+
+        <div class="form-row">
+          <label for="descricao">Descrição:</label>
+          <textarea id="descricao" name="descricao" rows="4" required placeholder="Informações adicionais do veículo"></textarea>
+        </div>
+
+        <div class="form-row">
+          <label for="documentacao">Documentação regular?</label>
+          <select id="documentacao" name="documentacao" required>
+            <option value="">Selecione</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+        </div>
+
+        <button type="submit">Enviar para WhatsApp</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Zapata Revendas. Todos os direitos reservados. By: Kimura</p>
+  </footer>
+
+  <script src="src/js/script.js" defer></script>
+</body>
+
+</html>

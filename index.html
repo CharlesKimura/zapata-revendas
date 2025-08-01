@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zapata Revendas</title>
+  <link rel="stylesheet" href="src/css/reset.css" />
+  <link rel="stylesheet" href="src/css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+
+<a href="https://www.instagram.com/zapata_revendas?igsh=eDgxNDI5aDI3Mmx6 " class="instagram-float" target="_blank"
+  aria-label="Instagram">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="instagram-icon">
+    <path fill="white"
+      d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9 114.9-51.3 114.9-114.9S287.7 141 224.1 141zm0 190.6c-41.8 0-75.7-33.9-75.7-75.7s33.9-75.7 75.7-75.7 75.7 33.9 75.7 75.7-33.9 75.7-75.7 75.7zm146.4-194.3c0 14.9-12 26.9-26.9 26.9-14.9 0-26.9-12-26.9-26.9s12-26.9 26.9-26.9 26.9 12 26.9 26.9zm76.1 27.2c-1.7-35.3-9.9-66.7-36.2-93-26.4-26.4-57.7-34.5-93-36.2-36.7-2.1-147.3-2.1-184 0-35.3 1.7-66.7 9.9-93 36.2s-34.5 57.7-36.2 93c-2.1 36.7-2.1 147.3 0 184 1.7 35.3 9.9 66.7 36.2 93s57.7 34.5 93 36.2c36.7 2.1 147.3 2.1 184 0 35.3-1.7 66.7-9.9 93-36.2 26.4-26.4 34.5-57.7 36.2-93 2.1-36.7 2.1-147.3 0-184zM398.8 388c-7.8 19.5-22.9 34.6-42.4 42.4-29.4 11.7-99.2 9-132.3 9s-102.9 2.6-132.3-9c-19.5-7.8-34.6-22.9-42.4-42.4-11.7-29.4-9-99.2-9-132.3s-2.6-102.9 9-132.3c7.8-19.5 22.9-34.6 42.4-42.4 29.4-11.7 99.2-9 132.3-9s102.9-2.6 132.3 9c19.5 7.8 34.6 22.9 42.4 42.4 11.7 29.4 9 99.2 9 132.3s2.7 102.9-9 132.3z" />
+  </svg>
+</a>
+
+<body>
+  <header>
+    <h1>Zapata Revendas</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="anuncie.html">Anuncie</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div id="filterBar" class="filter-bar">
+    <label for="filtroTipo">Filtrar por tipo:</label>
+    <select id="filtroTipo">
+      <option value="todos">Todos</option>
+      <option value="carro">Carro</option>
+      <option value="moto">Moto</option>
+    </select>
+
+    <div class="busca-codigo">
+      <label for="inputCodigo">Buscar por código:</label>
+      <div class="campo-busca">
+        <input type="text" id="inputCodigo" placeholder="Código do veículo" />
+        <button id="btnBuscarCodigo">🔍</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="estoque" id="estoque">
+      <h2>Nosso estoque</h2>
+      <div id="cards-container" class="cards-container"></div>
+      <div id="paginacao" class="paginacao">
+        <button id="paginaAnterior" disabled>«</button>
+        <span id="paginaAtual">1</span>
+        <button id="proximaPagina">»</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="modalDetalhes" class="modal-detalhes hidden" role="dialog" aria-modal="true">
+    <div class="modal-container">
+      <div class="modal-topo">
+        <button id="btnFecharModal" class="btn-voltar" aria-label="Fechar detalhes">← Voltar</button>
+      </div>
+
+      <div class="modal-layout">
+        <div id="modalImagens" class="imagens-scroll">
+          <div class="carrossel-wrapper">
+            <div class="carrossel-imagens">
+            </div>
+            <div class="carrossel-controles">
+              <button id="carouselPrev" class="carrossel-seta" aria-label="Imagem anterior">❮</button>
+              <div class="carrossel-indicadores" id="carrosselIndicadores">
+              </div>
+              <button id="carouselNext" class="carrossel-seta" aria-label="Próxima imagem">❯</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-infos-principais">
+          <h2 id="modalTitulo">Marca Modelo</h2>
+          <p id="modalAnoKm"></p>
+          <p id="modalLocal"></p>
+          <p id="modalPreco" class="preco-detalhe">R$ 00.000</p>
+          <button id="btnWhatsapp" class="btn-whatsapp">Falar com vendedor</button>
+        </div>
+      </div>
+
+      <div class="modal-infos-adicionais">
+        <div class="coluna">
+          <p><strong>Câmbio:</strong> <span id="modalCambio"></span></p>
+          <p><strong>Combustível:</strong> <span id="modalCombustivel"></span></p>
+          <p><strong>Motor:</strong> <span id="modalMotor"></span></p>
+          <p><strong>Documento:</strong> <span id="modalDocumento"></span></p>
+          <p><strong>Farol de milha:</strong> <span id="modalFarolMilha"></span></p>
+          <p><strong>Retrovisor elétrico:</strong> <span id="modalRetrovisorEletrico"></span></p>
+          <p><strong>Câmera de ré:</strong> <span id="modalCameraRe"></span></p>
+          <p><strong>Sensor de ré:</strong> <span id="modalSensorRe"></span></p>
+        </div>
+        <div class="coluna">
+          <p><strong>Direção elétrica:</strong> <span id="modalDirecaoEletrica"></span></p>
+          <p><strong>Multimídia:</strong> <span id="modalMultimidia"></span></p>
+          <p><strong>Volante multimídia:</strong> <span id="modalVolanteMultimidia"></span></p>
+          <p><strong>Ar-condicionado:</strong> <span id="modalArCondicionado"></span></p>
+          <p><strong>Roda de liga leve:</strong> <span id="modalRodaLigaLeve"></span></p>
+          <p><strong>Aro:</strong> <span id="modalAro"></span></p>
+          <p><strong>Manual:</strong> <span id="modalManual"></span></p>
+          <p><strong>Chave reserva:</strong> <span id="modalChaveReserva"></span></p>
+        </div>
+        <div class="descricao-full">
+          <h3>Descrição</h3>
+          <p id="modalDescricao">Descrição do veículo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Zapata Revendas. Todos os direitos reservados. By: Kimura</p>
+  </footer>
+
+  <script src="src/js/script.js"></script>
+</body>
+
+</html>
