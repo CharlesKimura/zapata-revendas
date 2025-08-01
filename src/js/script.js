@@ -196,8 +196,7 @@ function renderizarCard(veiculo, fotoUrl) {
 
   card.innerHTML = `
   <div class="card-image">
-    <img src="${fotoUrl}" alt="${veiculo.marca} ${veiculo.modelo}">
-  </div>
+    <img src="${fotoUrl}" alt="${veiculo.marca} ${veiculo.modelo}"></div>
   <div class="card-content">
     <h3>${capitalize(veiculo.marca)}</h3>
       <p class="modelo">${capitalize(veiculo.modelo)}</p>
@@ -251,11 +250,9 @@ function renderizarPagina() {
     renderizarCard(veiculo, fotoUrl);
   }
 
-  // Atualiza número da página
   const spanPagina = document.getElementById('paginaAtual');
   if (spanPagina) spanPagina.textContent = paginaAtual;
 
-  // Ativa/desativa botões
   const btnAnterior = document.getElementById('paginaAnterior');
   const btnProxima = document.getElementById('proximaPagina');
 
@@ -265,7 +262,6 @@ function renderizarPagina() {
   }
 }
 
-// Eventos de paginação
 const btnAnterior = document.getElementById('paginaAnterior');
 if (btnAnterior) {
   btnAnterior.addEventListener('click', () => {
