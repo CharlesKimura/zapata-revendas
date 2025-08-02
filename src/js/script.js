@@ -196,7 +196,8 @@ function renderizarCard(veiculo, fotoUrl) {
 
   card.innerHTML = `
   <div class="card-image">
-    <img src="${fotoUrl}" alt="${veiculo.marca} ${veiculo.modelo}"></div>
+    <img src="${fotoUrl}" alt="${veiculo.marca} ${veiculo.modelo}">
+  </div>
   <div class="card-content">
     <h3>${capitalize(veiculo.marca)}</h3>
       <p class="modelo">${capitalize(veiculo.modelo)}</p>
@@ -238,7 +239,7 @@ function renderizarPagina() {
   const paginaVeiculos = veiculosFiltrados.slice(inicio, fim);
 
   for (const veiculo of paginaVeiculos) {
-    let fotoUrl = 'https://via.placeholder.com/300x200?text=Sem+Imagem';
+    let fotoUrl = 'https://placehold.co/600x400';
     const imagem = veiculo.imageUrl?.[0];
 
     if (imagem) {
@@ -357,7 +358,7 @@ function renderizarPagina() {
   }
 
   paginaVeiculos.forEach(async veiculo => {
-    let fotoUrl = 'https://via.placeholder.com/300x200?text=Sem+Imagem';
+    let fotoUrl = 'https://placehold.co/300x200';
     const imagem = veiculo.imageUrl?.[0];
 
     if (imagem) {
