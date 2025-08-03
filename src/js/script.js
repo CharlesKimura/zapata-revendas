@@ -68,7 +68,7 @@ function abrirModalDetalhes(veiculo, fotoUrl) {
     modalRetrovisorEletrico: veiculo.retrovisor_eletrico,
     modalCameraRe: veiculo.camera_re,
     modalSensorRe: veiculo.sensor_re,
-    modalDirecaoEletrica: veiculo.direcao_eletrica,
+    modalDirecao: veiculo.direcao,
     modalMultimidia: veiculo.multimidia,
     modalVolanteMultimidia: veiculo.volante_multimidia,
     modalArCondicionado: veiculo.ar_condicionado,
