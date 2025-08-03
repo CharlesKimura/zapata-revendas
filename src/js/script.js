@@ -38,7 +38,6 @@ function capitalizeWords(str) {
 }
 
 function abrirModalDetalhes(veiculo, fotoUrl) {
-  console.log('✅ Função abrirModalDetalhes chamada');
   const modal = document.getElementById('modalDetalhes');
   if (!modal) return;
 
@@ -204,7 +203,6 @@ function renderizarCard(veiculo, fotoUrl) {
   `;
 
   card.addEventListener('click', () => {
-    console.log('✅ Card clicado');
     abrirModalDetalhes(veiculo, fotoUrl);
   });
 
@@ -278,7 +276,6 @@ function renderizarPaginacao() {
   btnAnterior.disabled = paginaAtual <= 1;
   btnProxima.disabled = paginaAtual >= totalPaginas;
 
-  console.log(`📑 Página ${paginaAtual} de ${totalPaginas}`);
 }
 
 const btnProxima = document.getElementById('proximaPagina');
@@ -425,7 +422,6 @@ Documentação completa? ${dados.documentacao}`;
 
       const numeroWhatsApp = "5511956105614";
       const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
-      console.log("📦 URL gerada:", url);
       window.open(url, "_blank");
     });
   }
