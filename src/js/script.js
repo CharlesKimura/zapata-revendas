@@ -4,9 +4,8 @@ let veiculosFiltrados = [];
 let paginaAtual = 1;
 const itensPorPagina = 30;
 
-
 const SUPABASE_URL = 'https://wbixlgxynxdmcajyucfp.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndiaXhsZ3h5bnhkbWNhanl1Y2ZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwMDMyNjEsImV4cCI6MjA2MjU3OTI2MX0.SSF1hX6vAmHndsLp1D4A3P3miV4AaFw9dL7cg2COeK4'; // Troque pela sua
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndiaXhsZ3h5bnhkbWNhanl1Y2ZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwMDMyNjEsImV4cCI6MjA2MjU3OTI2MX0.SSF1hX6vAmHndsLp1D4A3P3miV4AaFw9dL7cg2COeK4';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -184,8 +183,6 @@ function abrirModalDetalhes(veiculo, fotoUrl) {
 }
 
 function renderizarCard(veiculo, fotoUrl) {
-  console.log('🔁 Renderizando card:', veiculo.modelo);
-
   const container = document.getElementById('cards-container');
   const card = document.createElement('div');
   card.className = 'card';
@@ -210,12 +207,10 @@ function renderizarCard(veiculo, fotoUrl) {
     console.log('✅ Card clicado');
     abrirModalDetalhes(veiculo, fotoUrl);
   });
+
   const telefoneVendedor = '5511956105614';
-
   const mensagem = `Olá, tenho interesse no ${veiculo.marca} ${veiculo.modelo} do ano ${veiculo.ano} anunciado por ${veiculo.preco}.`;
-
   const linkWhatsApp = `https://wa.me/${telefoneVendedor}?text=${encodeURIComponent(mensagem)}`;
-
   const btnWhatsapp = document.getElementById('btnWhatsapp');
   btnWhatsapp.onclick = () => {
     window.open(linkWhatsApp, '_blank');
@@ -326,10 +321,8 @@ async function carregarVeiculos(filtroTipo = 'todos') {
     ? veiculos
     : veiculos.filter(v => v.tipo?.toLowerCase() === filtroTipo);
 
-  if (veiculosFiltrados.length === 0) {
-    container.innerHTML = '<p>Nenhum veículo encontrado para este filtro.</p>';
-    return;
-  }
+
+  veiculosFiltrados.sort((a, b) => Number(a.codigoVeiculo) - Number(b.codigoVeiculo));
 
   paginaAtual = 1;
   renderizarPagina();
@@ -348,38 +341,42 @@ function renderizarPagina() {
   const container = document.getElementById('cards-container');
   container.innerHTML = '';
 
-  const inicio = (paginaAtual - 1) * itensPorPagina;
-  const fim = inicio + itensPorPagina;
-  const paginaVeiculos = veiculosFiltrados.slice(inicio, fim);
-
-  if (paginaVeiculos.length === 0) {
+  if (!Array.isArray(veiculosFiltrados) || veiculosFiltrados.length === 0) {
     container.innerHTML = '<p>Nenhum veículo encontrado.</p>';
     return;
   }
 
-  paginaVeiculos.forEach(async veiculo => {
-    let fotoUrl = 'https://placehold.co/300x200';
+  const totalPaginas = Math.ceil(veiculosFiltrados.length / itensPorPagina);
+  const inicio = (paginaAtual - 1) * itensPorPagina;
+  const fim = inicio + itensPorPagina;
+  const paginaVeiculos = veiculosFiltrados.slice(inicio, fim);
+
+  for (const veiculo of paginaVeiculos) {
+    let fotoUrl = 'https://placehold.co/600x400';
     const imagem = veiculo.imageUrl?.[0];
 
     if (imagem) {
       const path = imagem.replace(/^\/+/, '').replace(/\.(jpg|png|jpeg)?$/, '');
       const tentativa = gerarPublicUrl(`${path}.jpg`);
-      try {
-        const response = await fetch(tentativa, { method: 'HEAD' });
-        if (response.ok) fotoUrl = tentativa;
-      } catch (err) {
-        console.warn('Erro ao verificar imagem:', err.message);
-      }
+      fotoUrl = tentativa;
     }
 
     renderizarCard(veiculo, fotoUrl);
-  });
+  }
 
-  renderizarPaginacao();
+  const spanPagina = document.getElementById('paginaAtual');
+  if (spanPagina) spanPagina.textContent = paginaAtual;
+
+  const btnAnterior = document.getElementById('paginaAnterior');
+  const btnProxima = document.getElementById('proximaPagina');
+
+  if (btnAnterior && btnProxima) {
+    btnAnterior.disabled = paginaAtual === 1;
+    btnProxima.disabled = paginaAtual >= totalPaginas;
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('🚀 DOM carregado');
   const form = document.getElementById("whatsappForm");
   if (form) {
     form.addEventListener("submit", function (e) {
