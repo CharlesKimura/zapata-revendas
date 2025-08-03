@@ -27,11 +27,11 @@ h2 {
   align-items: center;
   padding: 0rem 2rem;
   background-color: #1DE396;
-  color: white;
 }
 
 .logo img {
-  height: 150px;
+  height: 100px;
+  margin-top: 2px;
   object-fit: contain;
 }
 
@@ -574,6 +574,11 @@ h2 {
 }
 
 @media (max-width: 768px) {
+  .logo img {
+    height: 70px;
+    margin-top: 2px;
+  }
+
   .cards-container {
     padding: 0 10px;
     gap: 1rem;
