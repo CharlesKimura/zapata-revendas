@@ -2,6 +2,8 @@ let currentIndex = 0;
 let imageElements = [];
 let veiculosFiltrados = [];
 let paginaAtual = 1;
+let touchStartX = 0;
+let touchEndX = 0;
 const itensPorPagina = 30;
 
 const SUPABASE_URL = 'https://wbixlgxynxdmcajyucfp.supabase.co';
@@ -178,6 +180,34 @@ function abrirModalDetalhes(veiculo, fotoUrl) {
     window.open(linkWhatsApp, '_blank');
   };
 
+  const carrosselWrapper = document.querySelector('.carrossel-imagens');
+
+  carrosselWrapper.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, false);
+
+  carrosselWrapper.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipeGesture();
+  }, false);
+
+  function handleSwipeGesture() {
+    const deltaX = touchEndX - touchStartX;
+    const minSwipeDistance = 50;
+
+    if (Math.abs(deltaX) > minSwipeDistance) {
+      if (deltaX > 0) {
+
+        currentIndex = (currentIndex - 1 + imageElements.length) % imageElements.length;
+      } else {
+
+        currentIndex = (currentIndex + 1) % imageElements.length;
+      }
+
+      atualizarCarrossel(currentIndex);
+    }
+  }
+
   modal.classList.remove('hidden');
 }
 
@@ -186,8 +216,6 @@ function renderizarCard(veiculo, fotoUrl) {
   const card = document.createElement('div');
   card.className = 'card';
 
-  const preco = formatarPreco(veiculo.preco);
-  const precoAntigo = veiculo.preco_antigo ? formatarPreco(veiculo.preco_antigo) : '';
   const km = formatarKm(veiculo.km);
 
   card.innerHTML = `
