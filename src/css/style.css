@@ -574,6 +574,10 @@ h2 {
 }
 
 @media (max-width: 768px) {
+  .menu a {
+    font-size: 1rem;
+  }
+
   .logo img {
     height: 40px;
     margin-top: 2px;
