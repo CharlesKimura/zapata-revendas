@@ -30,7 +30,7 @@ h2 {
 }
 
 .logo img {
-  height: 100px;
+  height: 80px;
   margin-top: 2px;
   object-fit: contain;
 }
@@ -49,7 +49,7 @@ h2 {
 }
 
 .menu a:hover {
-  color: #ccc;
+  color: #000;
 }
 
 .filter-bar {
@@ -575,7 +575,7 @@ h2 {
 
 @media (max-width: 768px) {
   .logo img {
-    height: 70px;
+    height: 40px;
     margin-top: 2px;
   }
 
